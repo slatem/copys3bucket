@@ -32,3 +32,6 @@ php downloadBucket.php -c ~/.credentials/config.json --directory /storage/data/ 
 uploadBucket Example
 
 php downloadBucket.php -c ~/.credentials/config.json --directory /storage/data/ --bucket bucketname --concurrency 100 
+
+
+on an hi1.4xlarge Ec2 Instance running Amazon AMI I was able to get concurrency up to 500 with a 93% idle and 0% iowait. I'm sure it could be pushed further.

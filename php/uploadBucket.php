@@ -9,7 +9,7 @@ use Aws\S3\Enum\CannedAcl;
 date_default_timezone_set("America/Indianapolis");
 
 
-$options = getopt("c:",array("directory:","bucket:","keyPrefix:","concurrency"));
+$options = getopt("c:",array("directory:","bucket:","keyPrefix:","concurrency:"));
 
 $config = $options['c'];
 $aws = Aws::factory($config);
