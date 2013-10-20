@@ -45,8 +45,10 @@ UploadBucket will upload an entire directory (or portion thereof) to an s3 bucke
 
 uploadBucket Example
 ```
-php downloadBucket.php -c ~/.credentials/config.json --directory /storage/data/ --bucket bucketname --concurrency 100 
+php downloadBucket.php -c ~/.credentials/config.json --directory /storage/data/ --bucket bucketname --concurrency 100 --Expires 13 --ACL public-read 
 ```
+
+The expires is the number of years of the Expires header. This will help keep the object from redownloading to the browser. The ACL allows you to control the permissions of the file.
 
 On an hi1.4xlarge Ec2 Instance running Amazon Linux AMI I was able to get concurrency up to 6000 with a 93% idle and 0% iowait. I'm sure it could be pushed further.
 In order to achieve this I had to up the number of open files allowed by using the command:

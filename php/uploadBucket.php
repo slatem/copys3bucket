@@ -9,7 +9,7 @@ use Aws\S3\Enum\CannedAcl;
 date_default_timezone_set("America/Indianapolis");
 
 
-$options = getopt("c:",array("directory:","bucket:","keyPrefix:","concurrency:"));
+$options = getopt("c:",array("directory:","bucket:","keyPrefix:","concurrency:","baseDir:","Expires:","ACL:"));
 
 $config = $options['c'];
 $aws = Aws::factory($config);
@@ -17,7 +17,18 @@ $client = $aws->get('s3');
 
 if (empty($options['concurrency']))
 	$options['concurrency'] = 10;
+if (!empty($options['Expires']) && is_numeric($options['Expires'])){
+	$params = array(
+		'Expires' => gmdate('D, d M Y H:i:s T', strtotime("+$options[Expires] years")),
+		'CacheControl' => 'maxage='. strtotime("+$options[Expires] years"),
+	     );
+}
+if (!empty($options['ACL']))
+	$params['ACL'] = $options['ACL'];
 
-$client->uploadBucket($options['directory'],$options['bucket'],'',array("concurrency"=>$options['concurrency']));
+$client->uploadDirectory($options['directory'],$options['bucket'],'',array("concurrency"=>$options['concurrency'],
+									"base_dir"=>$options['baseDir'],
+									"params"=>$params
+									));
 
 ?>
