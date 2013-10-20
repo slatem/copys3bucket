@@ -4,6 +4,7 @@ copys3bucket
 Copy from an s3 bucket on 1 account to an s3 bucket on another
 
 config file format is json (-c config_filename) 
+
 {
   "includes": ["_aws"],
   "services": {
@@ -17,3 +18,17 @@ config file format is json (-c config_filename)
       }
   }
 }
+
+
+listBucket Example:
+
+php listBucket.php -c ~/.credentials/config.json -b bucketname -f /storage/data/listbucket.txt
+
+
+downloadBucket Example:
+
+php downloadBucket.php -c ~/.credentials/config.json --directory /storage/data/ --bucket bucketname --concurrency 100 
+
+uploadBucket Example
+
+php downloadBucket.php -c ~/.credentials/config.json --directory /storage/data/ --bucket bucketname --concurrency 100 
