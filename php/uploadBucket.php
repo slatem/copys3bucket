@@ -15,6 +15,9 @@ $config = $options['c'];
 $aws = Aws::factory($config);
 $client = $aws->get('s3');
 
-$client->downloadBucket($options['directory'],$options['bucket'],'',array("concurrency"=>$options['concurrency']));
+if (empty($options['concurrency']))
+	$options['concurrency'] = 10;
+
+$client->uploadBucket($options['directory'],$options['bucket'],'',array("concurrency"=>$options['concurrency']));
 
 ?>
