@@ -20,7 +20,7 @@ if (empty($options['concurrency']))
 if (!empty($options['Expires']) && is_numeric($options['Expires'])){
 	$params = array(
 		'Expires' => gmdate('D, d M Y H:i:s T', strtotime("+$options[Expires] years")),
-		'CacheControl' => 'maxage='. strtotime("+$options[Expires] years"),
+		'CacheControl' => 'maxage=31536000',
 	     );
 }
 if (!empty($options['ACL']))
